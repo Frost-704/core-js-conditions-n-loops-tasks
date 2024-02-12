@@ -546,11 +546,7 @@ function getNearestBigger(number) {
   let closestNumberIndex = 0;
   let sorted = [];
   let result = '';
-  const strToSplit = `${number}`;
-  const str = [];
-  for (let i = 0; i < strToSplit.length; i += 1) {
-    str.push(strToSplit[i]);
-  }
+  const str = Array.from(`${number}`);
   function arraySlice(arr, start, stop) {
     const sliced = [];
     for (let i = start; i < stop; i += 1) {
