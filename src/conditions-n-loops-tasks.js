@@ -533,8 +533,50 @@ function shuffleChar(str, iterations) {
  * @param {number} number The source number
  * @returns {number} The nearest larger number, or original number if none exists.
  */
-function getNearestBigger(/* number */) {
-  throw new Error('Not implemented');
+
+function getNearestBigger(number) {
+  let leftIndex = -1;
+  let rightPart = [];
+  let closestNumber = 0;
+  let closestNumberIndex = 0;
+  let sorted = [];
+  let result = '';
+  const strToSplit = `${number}`;
+  const str = [];
+  for (let i = 0; i < strToSplit.length; i += 1) {
+    str.push(strToSplit[i]);
+  }
+  function arraySlice(arr, start, stop) {
+    const sliced = [];
+    for (let i = start; i < stop; i += 1) {
+      sliced.push(arr[i]);
+    }
+    return sliced;
+  }
+  for (let i = str.length - 1; i >= 0; i -= 1) {
+    if (Number(str[i]) < Number(str[i + 1])) {
+      leftIndex = i;
+      break;
+    }
+  }
+  if (leftIndex === -1) {
+    return number;
+  }
+  rightPart = arraySlice(str, leftIndex + 1, str.length);
+  [closestNumber] = rightPart
+    .filter((e) => e > str[leftIndex])
+    .sort((a, b) => a - b);
+  closestNumberIndex = str.findLastIndex((e) => e === closestNumber);
+  [str[leftIndex], str[closestNumberIndex]] = [
+    str[closestNumberIndex],
+    str[leftIndex],
+  ];
+  rightPart = arraySlice(str, leftIndex + 1, str.length).sort((a, b) => a - b);
+  sorted = [...arraySlice(str, 0, leftIndex + 1), ...rightPart];
+  for (let i = 0; i < sorted.length; i += 1) {
+    result += sorted[i];
+  }
+  return Number(result);
 }
 
 module.exports = {
