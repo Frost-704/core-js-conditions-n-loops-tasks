@@ -558,7 +558,7 @@ function getNearestBigger(number) {
     }
     return sliced;
   }
-  for (let i = str.length - 1; i >= 0; i -= 1) {
+  for (let i = str.length - 2; i >= 0; i -= 1) {
     if (Number(str[i]) < Number(str[i + 1])) {
       leftIndex = i;
       break;
